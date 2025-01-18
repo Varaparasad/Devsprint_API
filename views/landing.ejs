@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/landing.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Smooch+Sans:wght@100..900&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+
+<style>
+ 
+ body{
+  font-family: Arial, Helvetica, sans-serif;
+color: white;
+caret-color:white;}
+
+
+.typewriter{
+  margin-top: 20vh;
+  font-size: 55px;
+  font-family: "Smooch Sans", serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+
+
+
+
+
+  .typewriter h1 {
+    overflow: hidden;
+    white-space: nowrap;
+    margin: 0 auto;
+    letter-spacing: 5px;
+    display: flex;
+    margin-left: 28%;
+    align-items: center;
+  }
+
+  .typewriter span {
+    overflow: hidden; /* Hides the text beyond the element's width */
+    border-right: 3px solid white; /* Simulates the blinking cursor */
+    white-space: nowrap; /* Prevents text from wrapping to the next line */
+    display: inline-block;
+    animation: blink-caret 0.5s step-end infinite;
+  }
+
+  @keyframes blink-caret {
+    50% {
+      border-right-color: transparent;
+    }
+  }
+</style>
+
+
+<body>
+  <div class="test">
+    <div class=login><a href="/login-signup"><button>login-signup</button></a></div>
+    <div class="typewriter">
+      <h1 class="typewriter">Silver Screen Symphonies:<span></span></h1>
+    </div>
+    <div class="hoverbelow"><h1>hover below</h1></div>
+    <div class="all">
+        <div class="left" href="/movies">
+          <div class="text">Movies</div>
+        </div>
+        
+        <div class="center">
+          <div class="explainer"><span>
+            <video autoplay loop muted style="height: 200px;">
+              <source src="v1landing.mp4" type="video/mp4">
+            </video>
+          </span></div>
+          <div class="text">Music</div>
+          </div>
+        <div class="right">
+          
+          <div class="text">Articles</div>
+        </div>
+        </div>
+        
+    
+    </div>
+</body>
+
+<script>
+  document.querySelector('.right').addEventListener('click',()=>{
+    window.location.href='/articles/general'
+  })
+  document.querySelector('.left').addEventListener('click',()=>{
+    window.location.href='/movies'
+  })
+  const arr = ['Movies', 'Music', 'Articles'];
+  const ele = document.querySelector('span'); // Select the <span> element
+
+  // Utility to create a delay
+  function delay(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  async function typeText(text) {
+    ele.textContent = ''; // Clear the content
+    for (let i = 0; i < text.length; i++) {
+      ele.textContent += text[i]; // Add one character at a time
+      await delay(100); // Delay between each character (typing speed)
+    }
+  }
+
+  async function eraseText() {
+    const text = ele.textContent;
+    for (let i = text.length; i >= 0; i--) {
+      ele.textContent = text.substring(0, i); // Remove one character at a time
+      await delay(50); // Delay between each character (erasing speed)
+    }
+  }
+
+  async function cycleText() {
+    while (true) {
+      for (const text of arr) {
+        await typeText(text); // Type the current text
+        await delay(2000); // Wait for 2 seconds after typing
+        await eraseText(); // Erase the current text
+        await delay(500); // Short delay before typing the next text
+      }
+    }
+  }
+
+  cycleText(); // Start the cycling animation
+</script>
+</html>
